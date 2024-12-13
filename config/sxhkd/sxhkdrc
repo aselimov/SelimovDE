@@ -1,0 +1,49 @@
+XF86Audio{Prev,Next}
+    mpc {cdprev,next}; kill -45 $(cat ~/.cache/pidofbar)
+
+XF86AudioPlay
+    mpc toggle
+
+XF86Audio{Raise,Lower}Volume
+    volume.sh {up,down}; kill -44 $(pidof dwmblocks)
+
+XF86AudioMute
+    volume.sh mute; kill -44 $(pidof dwmblocks)
+
+XF86MonBrightness{Up,Down}
+    xbacklight -{inc,dec} 10
+
+super+ctrl+p
+    pubs-rofi.sh open
+
+super+ctrl+i
+    pubs-rofi.sh tag
+
+super+ctrl+d
+    pubs-rofi.sh url
+
+super+ctrl+t
+    textbooks.sh
+
+super+ctrl+l
+    passmenu --type
+
+ctrl+shift+v
+    paste_from_primary.sh
+
+super+shift+s
+    maim -s --hidecursor  | xclip -selection clipboard -t image/png
+
+super+o
+    find_open
+super+y
+    xclip -o | viewurl
+
+ctrl+shift+s
+    swap_monitor.sh
+
+ctrl+shift+d
+    dock.sh
+
+shift+super+i
+    rofi-connman

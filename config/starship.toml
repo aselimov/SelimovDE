@@ -1,0 +1,168 @@
+#8e8e8e normal
+#BBBBBB bold
+#66a5ad accent
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$battery\
+$time\
+$status\
+$character"""
+
+[username]
+style_user = 'bold #66a5ad'
+
+[hostname]
+style = 'bold #BBBBBB'
+ssh_symbol = ""
+
+[singularity]
+style = 'bold #BBBBBB'
+
+[kubernetes]
+style = 'bold #BBBBBB'
+
+[vcsh]
+style = 'bold white'
+
+[git_branch]
+style = 'bold #BBBBBB'
+
+[git_commit]
+style = 'bold #BBBBBB'
+
+[docker_context]
+style = 'bold #BBBBBB'
+[package]
+style = 'bold #BBBBBB'
+symbol = " "
+[cmake]
+style = 'bold #BBBBBB'
+[dart]
+style = 'bold #BBBBBB'
+[dotnet]
+style = 'bold #BBBBBB'
+[elixir]
+style = 'bold #BBBBBB'
+[elm]
+style = 'bold #BBBBBB'
+[erlang]
+style = 'bold #BBBBBB'
+[golang]
+style = 'bold #BBBBBB'
+[helm]
+style = 'bold #BBBBBB'
+[java]
+style = 'bold #BBBBBB'
+[julia]
+style = 'bold #BBBBBB'
+[kotlin]
+style = 'bold #BBBBBB'
+[nim]
+style = 'bold #BBBBBB'
+[nodejs]
+style = 'bold #BBBBBB'
+[ocaml]
+style = 'bold #BBBBBB'
+[perl]
+style = 'bold #BBBBBB'
+[php]
+style = 'bold #BBBBBB'
+[purescript]
+style = 'bold #BBBBBB'
+[ruby]
+style = 'bold #BBBBBB'
+[swift]
+style = 'bold #BBBBBB'
+[terraform]
+style = 'bold #BBBBBB'
+[zig]
+style = 'bold #BBBBBB'
+[nix_shell]
+style = 'bold #BBBBBB'
+[conda]
+style = 'bold #BBBBBB'
+[memory_usage]
+style = 'bold #BBBBBB'
+[aws]
+style = 'bold #BBBBBB'
+[gcloud]
+style = 'bold #BBBBBB'
+[openstack]
+style = 'bold #BBBBBB'
+[crystal]
+style = 'bold #BBBBBB'
+[cmd_duration]
+style = 'bold #BBBBBB'
+[lua]
+style = 'bold #BBBBBB'
+symbol = "󰢱 "
+[jobs]
+style = 'bold #BBBBBB'
+[time]
+style = 'bold #BBBBBB'
+
+
+[python]
+symbol = "󱔎 "
+style = 'bold #BBBBBB'
+
+[rust]
+symbol = "󱘗 "
+style = 'bold #BBBBBB'
+
+[directory]
+truncate_to_repo = false
+style = 'bold #BBBBBB'
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[N](bold green)"

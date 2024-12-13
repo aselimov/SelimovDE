@@ -1,0 +1,1 @@
+/home/aselimov/projects/utility/scripts/pubs-rofi.sh

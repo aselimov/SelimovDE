@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case "$1" in 
+"C-w") while read file; do feh --bg-scale "$file"; done;;
+"C-d") while read file; do rm "$file"; done;;
+"C-c") while read file; do cp "$file" $HOME/pics/signal.png; done;;
+"w") while read file; do cp "$file" $HOME/dotfiles/wallpapers/; done;;
+esac
