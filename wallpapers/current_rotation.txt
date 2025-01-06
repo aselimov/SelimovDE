@@ -1,2 +1,0 @@
-./linux/void-linux-minimal.png
-./minimalist/zen-maze.png
