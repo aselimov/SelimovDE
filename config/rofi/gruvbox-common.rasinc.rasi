@@ -1,17 +1,9 @@
-/* ==========================================================================
-   File: gruvbox-common.rasi
-   Desc: Shared rules between all gruvbox themes
-   Author: bardisty <b@bah.im>
-   Source: https://github.com/bardisty/gruvbox-rofi
-   Modified: Mon Feb 12 2018 06:06:47 PST -0800
-   ========================================================================== */
-
 configuration {
-	modi:                       "drun";
+    modi:                       "drun";
     show-icons:                 true;
     icon-theme:                 "Papirus-Dark";
     display-drun:               "";
-	drun-display-format:        "{name}";
+    drun-display-format:        "{name}";
 }
 
 window {
