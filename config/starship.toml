@@ -163,6 +163,6 @@ truncate_to_repo = false
 style = 'bold #BBBBBB'
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
+success_symbol = "[󰜴](bold green)"
+error_symbol = "[󰬅](bold red)"
 vicmd_symbol = "[N](bold green)"
