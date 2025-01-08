@@ -1,4 +1,4 @@
-@import "gruvbox-common.rasinc" 
+@import "gruvbox-common.rasinc.rasi" 
 * {
     /* Theme settings */
     highlight: bold italic;
