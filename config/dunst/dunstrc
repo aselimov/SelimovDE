@@ -1,5 +1,5 @@
 [global]
-    frame_width = 0
+    frame_width = 2
     frame_color = "#888694"
     
     font = FiraCode Nerd Font 11
@@ -185,11 +185,11 @@
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#191919"
-    foreground = "#8e8e8e"
+    foreground = "#BBBBBB"
     timeout = 5
 
 [urgency_normal]
-    background = "#66A5AD"
+    background = "#BBBBBB"
     foreground = "#191919"
     timeout = 5
 
