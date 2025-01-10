@@ -43,6 +43,7 @@ export XDG_RUNTIME_DIR=/tmp/aselimov
 #Set mouse button settings 
 xinput set-prop "PS/2 Generic Mouse" "libinput Middle Emulation Enabled" 1
 synclient TouchpadOff=1
+synclient TapButton3=2
 #synclient TapButton1=0
 xrandr | grep "2560x1440" && dock.sh || mobile.sh
 
@@ -53,9 +54,9 @@ xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0 1
 exec sxhkd &
 exec mpd &  
 exec mpdnotif.sh &
-exec picom -b --blur-background-fixed --blur-method dual_kawase --blur-strength 3 --backend glx -f -D 3 --fade-exclude "class_g~='slop'" --blur-background-exclude "class_g~='slop'" --corner-radius 10 --rounded-corners-exclude "class_g~='dwm'" & 
+exec picom -b &
 exec wallpaper_randomizer.sh &
 exec dwmblocks &
 wmname LG3D &
-exec dbus-launch --sh-syntax --exit-with-session dwm
+exec dbus-launch --sh-syntax --exit-with-session "pipewire &; dwm"
 
