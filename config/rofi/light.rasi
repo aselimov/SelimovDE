@@ -1,0 +1,36 @@
+@import "gruvbox-common.rasinc.rasi" 
+* {
+    /* Theme settings */
+    highlight: bold italic;
+    scrollbar: false;
+
+    /* Theme colors */
+    background:                  #8e8e82;
+    background-color:            @background;
+    foreground:                  #191919;
+    border-color:                #61676B;
+    separatorcolor:              @border-color;
+    scrollbar-handle:            @border-color;
+
+    normal-background:           @background;
+    normal-foreground:           @foreground;
+    alternate-normal-background: @background;
+    alternate-normal-foreground: @foreground;
+    selected-normal-background:  #BBBBBB;
+    selected-normal-foreground:  #3d3839;
+
+    active-background:           #B77E64;
+    selected-active-background:  #D68C67;
+    active-foreground:           @background;
+    alternate-active-background: @active-background;
+    alternate-active-foreground: @active-foreground;
+    selected-active-foreground:  @active-foreground;
+
+    urgent-background:           #DE6E7C;
+    urgent-foreground:           @background;
+    alternate-urgent-background: @urgent-background;
+    alternate-urgent-foreground: @urgent-foreground;
+    selected-urgent-background:  #E8838F;
+    selected-urgent-foreground:  @urgent-foreground;
+}
+
