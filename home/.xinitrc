@@ -58,5 +58,5 @@ exec picom -b &
 exec wallpaper_randomizer.sh &
 exec dwmblocks &
 wmname LG3D &
-exec dbus-launch --sh-syntax --exit-with-session "pipewire &; dwm"
+exec dbus-launch --sh-syntax --exit-with-session "dwm"
 

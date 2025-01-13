@@ -1,2 +1,2 @@
-@import "gruvbox-common.rasinc.rasi" 
 @import "dark.rasi"
+@import "aditya_style.rasi" 
