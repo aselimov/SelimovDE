@@ -9,6 +9,8 @@ bindkey -v
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/aselimov/.zshrc'
 
+source ~/bin/lscolors.sh
+
 ~/bin/daily_scripture.sh
 autoload -Uz compinit
 compinit
