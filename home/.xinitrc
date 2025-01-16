@@ -51,6 +51,7 @@ xrandr | grep "2560x1440" && dock.sh || mobile.sh
 xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 1.0
 xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0 1
 
+exec xsettingsd &
 exec sxhkd &
 exec mpd &  
 exec mpdnotif.sh &
