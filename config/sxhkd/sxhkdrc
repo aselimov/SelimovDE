@@ -39,6 +39,9 @@ super+o
 super+y
     xclip -o | viewurl
 
+super+s
+    search
+
 ctrl+shift+s
     swap_monitor.sh
 
