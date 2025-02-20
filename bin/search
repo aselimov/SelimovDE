@@ -3,5 +3,7 @@
 dmenu="dmenu -l 0 -theme-str 'window {width: 80%;}'  -i"
 query=$(eval "$dmenu")
 if [ -n "$query" ]; then
-    ~/builds/zen-x86_64.AppImage --new-window "https://swisscows.com/en/web?query=${query// /+}"
+    query=${query//+/%2B}
+    query=${query// /+}
+    ~/.local/bin/zen-x86_64.AppImage --new-window "https://search.brave.com/search?q=$query"
 fi
