@@ -6,10 +6,10 @@ total=$(grep -oP '^MemTotal: *\K[0-9]+' /proc/meminfo)
 mem=" $(echo "scale=1; 100*($total-$available)/$total"| bc | cut -d '.' -f1 )"
 
 if [ $mem -gt 80 ]; then 
-    mem="	$mem"
+    mem="	$mem %"
 elif [ $mem -gt 50 ]; then 
-    mem="$mem"
+    mem="$mem %"
 else
-    mem="$mem"
+    mem=" "
 fi 
-echo "$mem%"
+echo "$mem"

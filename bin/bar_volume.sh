@@ -3,12 +3,16 @@
 
 vol="$(pamixer --get-volume)"
 
-if [ "$vol" -gt "70" ]; then 
+#if [ "$vol" -gt "70" ]; then 
+#    icon="󰕾"
+#elif [ "$vol" -gt "30" ]; then 
+#    icon="󰖀"
+#el
+
+if [ "$vol" -gt "0" ]; then
     icon="󰕾"
-elif [ "$vol" -gt "30" ]; then 
-    icon="󰖀"
 else
-    icon="󰕿"
+    icon=""
 fi
 
-echo "$icon $vol%"
+echo "$icon "

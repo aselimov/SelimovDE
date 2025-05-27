@@ -50,3 +50,6 @@ ctrl+shift+d
 
 shift+super+i
     rofi-connman
+
+super+e
+    emojis
