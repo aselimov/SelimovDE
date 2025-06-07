@@ -12,7 +12,7 @@ zstyle :compinstall filename '/home/aselimov/.zshrc'
 export LS_COLORS='di=1;37:ln=35:so=32:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 alias ls="ls --classify --group-directories-first --color"
 
-~/bin/daily_scripture.sh
+#~/bin/daily_scripture.sh
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -31,7 +31,7 @@ function addbin(){
 }
 eval "$(starship init zsh)"
 zstyle -e ':completion:*:hosts' hosts 'reply=(
-  ${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
+  ${=${${(f)"$(cat {/etc/ssh_,~/ar.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
   ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
 )'
 
@@ -42,17 +42,17 @@ source "/home/aselimov/.config/zsh/zsh-history-substring-search/zsh-history-subs
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 export XKB_DEFAULT_OPTIONS="caps:escape"
+export PASSWORD_STORE_CHARACTER_SET='a-zA-Z0-9+\-$!*_='
 
-
-
-function panbeamer (){
-  pandoc --pdf-engine=xelatex -o "${1/md/pdf}" -t beamer "$1"
-}
-
-export panbeamer
+XDEB_PKGROOT=${HOME}/.config/xdeb
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Add cuda to path
+export PATH="$PATH:/usr/local/cuda-12.8/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64"
+
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
+

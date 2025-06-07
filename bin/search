@@ -5,5 +5,5 @@ query=$(eval "$dmenu")
 if [ -n "$query" ]; then
     query=${query//+/%2B}
     query=${query// /+}
-    ~/.local/bin/zen-x86_64.AppImage --new-window "https://search.brave.com/search?q=$query"
+    zen-browser --new-window "https://search.brave.com/search?q=$query"
 fi

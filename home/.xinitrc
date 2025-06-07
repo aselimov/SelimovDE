@@ -36,7 +36,7 @@ fi
 
 export PATH="$PATH:/home/aselimov/bin:/home/aselimov/.local/bin:/home/aselimov/scripts"
 xinput set-prop "DualPoint Stick" "libinput Accel Speed" 0.8
-export BROWSER=/usr/bin/firefox
+export BROWSER=/home/aselimov/bin/zen-browser
 export EDITOR=/usr/bin/nvim
 export XDG_RUNTIME_DIR=/tmp/aselimov
 
@@ -51,10 +51,11 @@ xrandr | grep "2560x1440" && dock.sh || mobile.sh
 xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 1.0
 xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0 1
 
+exec bato &
+exec sync_mail.sh &
 exec xsettingsd &
 exec sxhkd &
 exec mpd &  
-exec mpdnotif.sh &
 exec picom -b &
 exec wallpaper_randomizer.sh &
 exec dwmblocks &

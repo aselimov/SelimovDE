@@ -11,6 +11,7 @@
 configuration {
 	modi:                       "drun,run";
     show-icons:                 false;
+    font: "CaskaydiaMono Nerd Font 12";
     display-drun:               "";
     display-run:                "";
     display-filebrowser:        "";
