@@ -1,1 +1,1 @@
-echo "  $(date '+%b %d (%a) %I:%M%p') "
+echo "$(/home/aselimov/bin/title_text.sh)"

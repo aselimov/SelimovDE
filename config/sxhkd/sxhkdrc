@@ -13,33 +13,33 @@ XF86AudioMute
 XF86MonBrightness{Up,Down}
     xbacklight -{inc,dec} 10
 
-super+ctrl+p
+alt+ctrl+p
     pubs-rofi.sh open
 
-super+ctrl+i
+alt+ctrl+i
     pubs-rofi.sh tag
 
-super+ctrl+d
+alt+ctrl+d
     pubs-rofi.sh url
 
-super+ctrl+t
+alt+ctrl+t
     textbooks.sh
 
-super+ctrl+l
+alt+ctrl+l
     passmenu --type
 
 ctrl+shift+v
     paste_from_primary.sh
 
-super+shift+s
+alt+shift+s
     maim -s --hidecursor  | xclip -selection clipboard -t image/png
 
-super+o
+alt+o
     find_open
-super+y
+alt+y
     xclip -o | viewurl
 
-super+s
+alt+s
     search
 
 ctrl+shift+s
@@ -48,8 +48,8 @@ ctrl+shift+s
 ctrl+shift+d
     dock.sh
 
-shift+super+i
+shift+alt+i
     rofi-connman
 
-super+e
+alt+e
     emojis

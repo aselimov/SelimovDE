@@ -1,4 +1,4 @@
-# xinput set-prop 13 291 0, 0, 1!/bin/sh
+#!/bin/sh
 
 userresources=$HOME/.Xresources
 

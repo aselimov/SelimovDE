@@ -43,7 +43,7 @@ else
     # Rofi theme 
     sed -i -e "s/dark.rasi/light.rasi/" $HOME/.config/rofi/config.rasi
 
-    # Update ST colors
+#    # Update ST colors
     echo " st*color0:#F0EDEC
  st*color1:#A8334C
  st*color2:#4F6C31
