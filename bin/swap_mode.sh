@@ -32,10 +32,6 @@ if [ -f ~/.config/nvim/light_mode ]; then
     # Remove neovim colorscheme file
     rm ~/.config/nvim/light_mode
 
-    # Set the correct command for teams and outlook
-    sed -ie "s@Exec.*@Exec=/usr/lib/chromium/chromium --profile-directory=Default --app-id=ckdeglopgbdgpkmhnmkigpfgebcdbanf --enable-features=WebContentsForceDark:inversion_method/cielab_based/image_behavior/none/text_lightness_threshold/150/background_lightness_threshold/205@" /home/aselimov/.local/share/applications/chrome-ckdeglopgbdgpkmhnmkigpfgebcdbanf-Default.desktop
-
-    sed -ie "s@Exec.*@Exec=/usr/lib/chromium/chromium --profile-directory=Default --app-id=famdcdojlmjefmhdpbpmekhodagkodei %U --enable-features=WebContentsForceDark:inversion_method/cielab_based/image_behavior/none/text_lightness_threshold/150/background_lightness_threshold/205@" /home/aselimov/.local/share/applications/chrome-famdcdojlmjefmhdpbpmekhodagkodei-Default.desktop
 else
     echo "Swapping to light mode"
     # GTK Theme
@@ -64,11 +60,6 @@ else
     xrdb merge ~/.Xresources
     killall st -s "USR1"
     
-     # Set the correct command for teams and outlook
-    sed -ie "s@Exec.*@Exec=/usr/lib/chromium/chromium --profile-directory=Default --app-id=ckdeglopgbdgpkmhnmkigpfgebcdbanf@" /home/aselimov/.local/share/applications/chrome-ckdeglopgbdgpkmhnmkigpfgebcdbanf-Default.desktop
-
-    sed -ie "s@Exec.*@Exec=/usr/lib/chromium/chromium --profile-directory=Default --app-id=famdcdojlmjefmhdpbpmekhodagkodei %U@" /home/aselimov/.local/share/applications/chrome-famdcdojlmjefmhdpbpmekhodagkodei-Default.desktop   
-
     # Add neovim colorscheme file
     touch ~/.config/nvim/light_mode
 fi
