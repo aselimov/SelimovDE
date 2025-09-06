@@ -1,9 +1,13 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt extendedglob notify
 unsetopt autocd beep
+setopt INC_APPEND_HISTORY    # Write to history file immediately, not when shell exits
+setopt SHARE_HISTORY         # Share history between all sessions
+setopt HIST_IGNORE_DUPS      # Don't save duplicate commands
+setopt HIST_IGNORE_SPACE     # Don't save commands starting with space
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -26,6 +30,7 @@ alias mergepdf="gs -dBATCH -dNOPAUSE -dQUIET -sDEVICE=pdfwrite -sOutputFile=outp
 alias ddg="w3m ddg.gg"
 alias cal="khal calendar"
 #alias sxiv="sxiv-rifle"
+alias clip2png="xclip -selection clipboard -target image/png -out"
 function addbin(){
     ln -s $PWD/$1 /home/aselimov/bin
 }
@@ -56,9 +61,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64"
 
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 
-if [ -z "$TMUX" ]; then 
-  tmux
-fi
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+

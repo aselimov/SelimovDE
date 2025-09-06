@@ -28,9 +28,6 @@ alt+ctrl+t
 alt+ctrl+l
     passmenu --type
 
-ctrl+shift+v
-    paste_from_primary.sh
-
 alt+shift+s
     maim -s --hidecursor  | xclip -selection clipboard -t image/png
 
@@ -53,3 +50,11 @@ shift+alt+i
 
 alt+e
     emojis
+
+# Smart copy/paste that works everywhere
+alt + c
+    xclip -selection primary -o | xclip -selection clipboard -i
+
+# Pste  
+alt + v
+    sh -c 'xclip -selection clipboard -o | xclip -selection primary -i && xdotool click 2'

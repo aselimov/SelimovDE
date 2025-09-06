@@ -56,5 +56,6 @@ deploy_links() {
 deploy_links "$PROJECT_ROOT/bin"    "$HOME/bin"        "bin"
 deploy_links "$PROJECT_ROOT/home"   "$HOME"            "home"
 deploy_links "$PROJECT_ROOT/config" "$HOME/.config"    "config"
+deploy_links "$PROJECT_ROOT/wallpapers" "$HOME/media/wallpapers"    "wallpapers"
 
 echo "All deployments complete!"
