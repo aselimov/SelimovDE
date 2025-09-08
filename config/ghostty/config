@@ -1,0 +1,20 @@
+# --- Basics
+font-family = "IosevkaTermSlab Nerd Font Propo"
+font-size = 13
+
+# Disable programming ligatures (same as your HarfBuzz flags)
+# (-liga, -clig, -calt match your calt=0, clig=0, liga=0)
+font-feature = -liga,-clig,-calt
+
+# Ghostty has no custom tab bar (uses native macOS tabs), so nothing to disable.
+
+# Auto light/dark theme pair that matches your two palettes below
+#theme = dark:my-dark,light:my-light
+theme = my-dark
+
+# Font-size keybindings (match Ctrl+Shift+j/k from WezTerm)
+keybind = all:ctrl+shift+k=increase_font_size:1
+keybind = all:ctrl+shift+j=decrease_font_size:1
+
+# Optional: make the split divider visible (newer Ghostty)
+# split-divider-color = #444444
