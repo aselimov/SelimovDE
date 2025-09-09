@@ -49,16 +49,10 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64"
 
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
-# Settings that need to swap between Mac and Linux
-if [ "$(uname)" = "Darwin" ]; then
-  export PATH="$PATH:/opt/homebrew/bin"
-  alias ls="gls --classify --group-directories-first --color"
-else
-  alias ls="ls --classify --group-directories-first --color"
+if [ $(which pyenv 2>&1 1>/dev/null) ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init - zsh)"
 fi
 
 eval "$(starship init zsh)"
@@ -73,3 +67,15 @@ source "$HOME/.config/zsh/zsh-history-substring-search/zsh-history-substring-sea
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+# Settings that need to swap between Mac and Linux
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH="$PATH:/opt/homebrew/bin"
+  alias ls="gls --classify --group-directories-first --color"
+  # I only start tmux by default on Mac because of dwm+swallow patch
+   if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+    tmux attach -t dev || tmux new -s dev
+  fi 
+else
+  alias ls="ls --classify --group-directories-first --color"
+fi
