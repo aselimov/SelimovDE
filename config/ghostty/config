@@ -4,6 +4,7 @@ font-style = "Regular"
 font-size = 13
 bold-color = "#fefefe"
 background-opacity = 1.0
+window-decoration = none
 
 # Auto light/dark theme pair that matches your two palettes below
 #theme = dark:my-dark,light:my-light
