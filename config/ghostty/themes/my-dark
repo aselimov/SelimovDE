@@ -1,5 +1,5 @@
 # Colors = your WezTerm dark palette
-foreground = #8e8e8e
+foreground = #BBBBBB
 background = #191919
 cursor-color = #BBBBBB
 cursor-text = #191919

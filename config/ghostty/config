@@ -1,5 +1,10 @@
 # --- Basics
 font-family = "IosevkaTermSlab Nerd Font Propo"
+font-style = "Regular"
+
+# Optional: make bold map to bright colors like iTerm2
+
+bold-color = "#fefefe"
 font-size = 13
 
 # Disable programming ligatures (same as your HarfBuzz flags)
@@ -15,6 +20,7 @@ theme = my-dark
 # Font-size keybindings (match Ctrl+Shift+j/k from WezTerm)
 keybind = all:ctrl+shift+k=increase_font_size:1
 keybind = all:ctrl+shift+j=decrease_font_size:1
+background-opacity = 1.0
 
 # Optional: make the split divider visible (newer Ghostty)
 # split-divider-color = #444444

@@ -14,7 +14,6 @@ bindkey -v
 zstyle :compinstall filename '/home/aselimov/.zshrc'
 
 export LS_COLORS='di=1;37:ln=35:so=32:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-alias ls="ls --classify --group-directories-first --color"
 
 #~/bin/daily_scripture.sh
 autoload -Uz compinit
@@ -34,18 +33,7 @@ alias clip2png="xclip -selection clipboard -target image/png -out"
 function addbin(){
     ln -s $PWD/$1 /home/aselimov/bin
 }
-eval "$(starship init zsh)"
-zstyle -e ':completion:*:hosts' hosts 'reply=(
-  ${=${${(f)"$(cat {/etc/ssh_,~/ar.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
-  ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
-)'
 
-source "/home/aselimov/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "/home/aselimov/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "/home/aselimov/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 export XKB_DEFAULT_OPTIONS="caps:escape"
 export PASSWORD_STORE_CHARACTER_SET='a-zA-Z0-9+\-$!*_='
 
@@ -65,3 +53,23 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
+# Settings that need to swap between Mac and Linux
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH="$PATH:/opt/homebrew/bin"
+  alias ls="gls --classify --group-directories-first --color"
+else
+  alias ls="ls --classify --group-directories-first --color"
+fi
+
+eval "$(starship init zsh)"
+zstyle -e ':completion:*:hosts' hosts 'reply=(
+  ${=${${(f)"$(cat {/etc/ssh_,~/ar.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
+  ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+)'
+
+source "$HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOME/.config/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
