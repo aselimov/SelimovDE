@@ -5,6 +5,7 @@ cursor-color = #BBBBBB
 cursor-text = #191919
 selection-foreground = #191919
 selection-background = #BBBBBB
+bold-color = "#fefefe"
 
 # ANSI 0..15
 palette = 0=#191919
