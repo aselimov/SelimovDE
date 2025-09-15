@@ -1,7 +1,6 @@
 #==============================================================================
 # Zsh Configuration
 #==============================================================================
-
 # History settings
 HISTFILE=~/.histfile
 HISTSIZE=100000
@@ -79,9 +78,33 @@ zstyle -e ':completion:*:hosts' hosts 'reply=(
 #==============================================================================
 
 # nvm
+# Lazy-load nvm - only initialize when first used
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Function to load nvm (called only once)
+load_nvm() {
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+# Create placeholder functions that load nvm once, then call the real command
+nvm() {
+    unset -f nvm node npm
+    load_nvm
+    nvm "$@"
+}
+
+node() {
+    unset -f nvm node npm  
+    load_nvm
+    node "$@"
+}
+
+npm() {
+    unset -f nvm node npm
+    load_nvm
+    npm "$@"
+}
 
 # ghcup
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
@@ -118,4 +141,21 @@ source "$HOME/.config/zsh/zsh-history-substring-search/zsh-history-substring-sea
 bindkey -v
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+#==============================================================================
+# OS-Specific Configuration
+#==============================================================================
+
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH="$PATH:/opt/homebrew/bin"
+  alias ls="gls --classify --group-directories-first --color"
+  alias gemini="(source ~/.gemini_project  && gemini)"
+  export NVIM_JDTLS_JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/"
+  # I only start tmux by default on Mac because of dwm+swallow patch
+   if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+    tmux attach -t dev || tmux new -s dev
+  fi
+else
+  alias ls="ls --classify --group-directories-first --color"
+fi
 

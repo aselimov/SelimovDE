@@ -1,12 +1,14 @@
 # --- Basics
 font-family = "IosevkaTermSlab Nerd Font Propo"
 font-style = "Regular"
-font-size = 13
+font-size = 12
 background-opacity = 1.0
+window-decoration = none
+confirm-close-surface = false
 
 # Auto light/dark theme pair that matches your two palettes below
 #theme = dark:my-dark,light:my-light
-theme = zenwritten-light
+theme = zenwritten-dark
 
 # Font-size keybindings (match Ctrl+Shift+j/k from WezTerm)
 keybind = all:ctrl+shift+k=increase_font_size:1

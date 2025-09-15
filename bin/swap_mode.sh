@@ -28,7 +28,6 @@ else
 fi
 
 # Reload neovim theme
-local keys
 if [ "$MODE" = "light" ]; then
     keys=$'<C-\\><C-n>:silent! let g:light_mode=1 | set background=light |  doautocmd ColorScheme | redraw!<CR>'
 else
