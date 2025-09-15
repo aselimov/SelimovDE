@@ -13,18 +13,18 @@ sed -E -i '' \
     -e 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-light/\1zenwritten-dark/' \
     "$GHOSTTY_CONF"
 
-# Toggle Neovim vim.g.light_mode true/false
-sed -E -i '' \
-    -e 's/(vim\.g\.light_mode[[:space:]]*=[[:space:]]*)true/\1false/' \
-    -e 't' \
-    -e 's/(vim\.g\.light_mode[[:space:]]*=[[:space:]]*)false/\1true/' \
-    "$NVIM_CONF"
-
 # Determine new mode from Ghostty theme
 if grep -Eq '^\s*theme\s*=\s*zenwritten-light' "$GHOSTTY_CONF"; then
     MODE="light"
+    # Toggle Neovim vim.g.light_mode true/false
+    sed -E -i '' \
+        -e 's/(vim\.g\.light_mode[[:space:]]*=[[:space:]]*).*/\1true/' \
+        "$NVIM_CONF"
 else
     MODE="dark"
+    sed -E -i '' \
+        -e 's/(vim\.g\.light_mode[[:space:]]*=[[:space:]]*).*/\1false/' \
+        "$NVIM_CONF"
 fi
 
 # Reload neovim theme
