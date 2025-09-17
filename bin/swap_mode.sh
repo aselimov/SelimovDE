@@ -6,26 +6,37 @@ GHOSTTY_CONF="${HOME}/.config/ghostty/config"
 [ -f "$NVIM_CONF" ] || { echo "Missing $NVIM_CONF"; exit 1; }
 [ -f "$GHOSTTY_CONF" ] || { echo "Missing $GHOSTTY_CONF"; exit 1; }
 
-# Toggle Ghostty theme between zenwritten-dark and zenwritten-light
-sed -E -i '' \
-    -e 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-dark/\1zenwritten-light/' \
-    -e 't' \
-    -e 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-light/\1zenwritten-dark/' \
-    "$GHOSTTY_CONF"
-
-# Determine new mode from Ghostty theme
-if grep -Eq '^\s*theme\s*=\s*zenwritten-light' "$GHOSTTY_CONF"; then
+set_light_mode() {
+    sed -E -i '' 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-dark/\1zenwritten-light/' "$GHOSTTY_CONF"
+    sed -E -i '' 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1true/' "$NVIM_CONF"
     MODE="light"
-    # Toggle Neovim vim.g.light_mode true/false
-    sed -E -i '' \
-        -e 's/(vim\.g\.light_mode[[:space:]]*=[[:space:]]*).*/\1true/' \
-        "$NVIM_CONF"
-else
+}
+
+set_dark_mode() {
+    sed -E -i '' 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-light/\1zenwritten-dark/' "$GHOSTTY_CONF"
+    sed -E -i '' 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1false/' "$NVIM_CONF"
     MODE="dark"
-    sed -E -i '' \
-        -e 's/(vim\.g\.light_mode[[:space:]]*=[[:space:]]*).*/\1false/' \
-        "$NVIM_CONF"
-fi
+}
+
+toggle_mode() {
+    if grep -Eq '^\s*theme\s*=\s*zenwritten-light' "$GHOSTTY_CONF"; then
+        set_dark_mode
+    else
+        set_light_mode
+    fi
+}
+
+case "$1" in
+    light)
+        set_light_mode
+        ;;
+    dark)
+        set_dark_mode
+        ;;
+    toggle|*)
+        toggle_mode
+        ;;
+esac
 
 # Reload neovim theme
 if [ "$MODE" = "light" ]; then
@@ -36,24 +47,13 @@ fi
 for dir in "${XDG_RUNTIME_DIR:-}" "${TMPDIR:-/tmp}" "/tmp" "$HOME/.local/state/nvim"; do
     [ -d "$dir" ] || continue
     find "$dir" -type s -name 'nvim*' 2>/dev/null | while read -r sock; do
-        if command -v timeout >/dev/null 2>&1; then
-            timeout 1s nvim --server "$sock" --remote-send "$keys" >/dev/null 2>&1 || true
-        else
-            ( nvim --server "$sock" --remote-send "$keys" >/dev/null 2>&1 & )
-        fi
+        timeout 1s nvim --server "$sock" --remote-send "$keys" >/dev/null 2>&1 || true
     done
 done
 
 
 # Reload Ghostty: send SIGUSR2 to running ghostty processes (macOS/Linux)
-if command -v pkill >/dev/null 2>&1; then
-    pkill -USR2 -x ghostty 2>/dev/null || true
-elif command -v killall >/dev/null 2>&1; then
-    killall -USR2 ghostty 2>/dev/null || true
-else
-    pids=$(pgrep -x ghostty 2>/dev/null || true)
-    [ -n "${pids:-}" ] && kill -USR2 $pids || true
-fi
+pkill -USR2 -x ghostty 2>/dev/null
 
 echo "Switched to ${MODE} mode"
 
