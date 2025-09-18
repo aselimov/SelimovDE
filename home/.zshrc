@@ -57,7 +57,7 @@ alias clip2png="xclip -selection clipboard -target image/png -out"
 
 load_env() {
   set -a
-  . "$1"
+  . "./$1"
   set +a
 }
 
