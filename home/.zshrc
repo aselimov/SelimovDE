@@ -24,9 +24,22 @@ export XKB_DEFAULT_OPTIONS="caps:escape"
 export PASSWORD_STORE_CHARACTER_SET='a-zA-Z0-9+\-$!*_='
 export XDEB_PKGROOT=${HOME}/.config/xdeb
 
-# Add cuda to path
-#export PATH="$PATH:/usr/local/cuda-12.8/bin"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64"
+#==============================================================================
+# OS-Specific Configuration
+#==============================================================================
+
+if [ "$(uname)" = "Darwin" ]; then
+  export PATH="$PATH:/opt/homebrew/bin"
+  alias ls="gls --classify --group-directories-first --color"
+  alias gemini="(source ~/.gemini_project  && gemini)"
+  export NVIM_JDTLS_JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/"
+  # I only start tmux by default on Mac because of dwm+swallow patch
+   if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+    tmux attach -t dev || tmux new -s dev
+  fi
+else
+  alias ls="ls --classify --group-directories-first --color"
+fi
 
 #==============================================================================
 # Aliases
@@ -40,7 +53,7 @@ alias clip2png="xclip -selection clipboard -target image/png -out"
 
 load_env() {
   set -a
-  . "$1"
+  . "./$1"
   set +a
 }
 
@@ -93,10 +106,16 @@ npm() {
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 
 # pyenv
-if [ $(which pyenv 2>&1 1>/dev/null) ]; then
+if command -v pyenv >/dev/null 2>&1; then
   export PYENV_ROOT="$HOME/.pyenv"
   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init - zsh)"
+fi
+
+# jenv
+if command -v jenv >/dev/null 2>&1; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
 fi
 
 # starship

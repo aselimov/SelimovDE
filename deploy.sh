@@ -33,7 +33,7 @@ deploy_links() {
             if [ -L "$dest_link" ]; then
                 echo "Replacing existing symlink: $dest_link"
                 rm "$dest_link"
-            # If it's a directory or file, back it up.
+                # If it's a directory or file, back it up.
             else
                 echo "Backing up existing entry: $dest_link -> ${dest_link}.bak"
                 mv "$dest_link" "${dest_link}.bak"
@@ -45,7 +45,7 @@ deploy_links() {
 
         # Create the new symlink.
         echo "Linking: $dest_link -> $abs_src_path"
-        ln -s "$abs_src_path" "$dest_link" 
+        ln -s "$abs_src_path" "$dest_link"
     done
     echo "Done."
     echo
@@ -57,5 +57,6 @@ deploy_links "$PROJECT_ROOT/bin"    "$HOME/bin"        "bin"
 deploy_links "$PROJECT_ROOT/home"   "$HOME"            "home"
 deploy_links "$PROJECT_ROOT/config" "$HOME/.config"    "config"
 deploy_links "$PROJECT_ROOT/wallpapers" "$HOME/media/wallpapers"    "wallpapers"
+deploy_links "$PROJECT_ROOT/gemini" "$HOME/.gemini"    "gemini"
 
 echo "All deployments complete!"
