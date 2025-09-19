@@ -85,21 +85,29 @@ load_nvm() {
 
 # Create placeholder functions that load nvm once, then call the real command
 nvm() {
-    unset -f nvm node npm
+    unset -f nvm node npm gemini
     load_nvm
     nvm "$@"
 }
 
 node() {
-    unset -f nvm node npm  
+    unset -f nvm node npm gemini
     load_nvm
     node "$@"
 }
 
 npm() {
-    unset -f nvm node npm
+    unset -f nvm node npm gemini
     load_nvm
     npm "$@"
+}
+
+gemini() {
+  unset -f nvm node npm gemini
+  load_nvm
+  gemini "$@"
+
+
 }
 
 # ghcup
