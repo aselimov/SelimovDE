@@ -25,7 +25,7 @@ export PASSWORD_STORE_CHARACTER_SET='a-zA-Z0-9+\-$!*_='
 export XDEB_PKGROOT=${HOME}/.config/xdeb
 
 # Add cuda to path
-export PATH="$PATH:/usr/local/cuda-12.8/bin"
+#export PATH="$PATH:/usr/local/cuda-12.8/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64"
 
 #==============================================================================
@@ -129,10 +129,10 @@ if [ "$(uname)" = "Darwin" ]; then
   alias gemini="(source ~/.gemini_project  && gemini)"
   export NVIM_JDTLS_JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/"
   # I only start tmux by default on Mac because of dwm+swallow patch
-   if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
-    tmux attach -t dev || tmux new -s dev
-  fi
 else
   alias ls="ls --classify --group-directories-first --color"
 fi
 
+if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+ tmux attach -t dev || tmux new -s dev
+fi
