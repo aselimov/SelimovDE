@@ -26,15 +26,12 @@ export XDEB_PKGROOT=${HOME}/.config/xdeb
 
 # Custom path additions
 source ~/.profile
-export PATH="$PATH:/usr/local/cuda-12.8/bin:$HOME/bin"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-12.8/lib64"
 
 #==============================================================================
 # Aliases
 #==============================================================================
 
 alias clip2png="xclip -selection clipboard -target image/png -out"
-
 
 #==============================================================================
 # Gemini Agents
@@ -135,21 +132,29 @@ load_nvm() {
 
 # Create placeholder functions that load nvm once, then call the real command
 nvm() {
-    unset -f nvm node npm
+    unset -f nvm node npm gemini
     load_nvm
     nvm "$@"
 }
 
 node() {
-    unset -f nvm node npm  
+    unset -f nvm node npm gemini
     load_nvm
     node "$@"
 }
 
 npm() {
-    unset -f nvm node npm
+    unset -f nvm node npm gemini
     load_nvm
     npm "$@"
+}
+
+gemini() {
+  unset -f nvm node npm gemini
+  load_nvm
+  gemini "$@"
+
+
 }
 
 # ghcup
@@ -201,10 +206,10 @@ if [ "$(uname)" = "Darwin" ]; then
   }
   export NVIM_JDTLS_JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/"
   # I only start tmux by default on Mac because of dwm+swallow patch
-   if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
-    tmux attach -t dev || tmux new -s dev
-  fi
 else
   alias ls="ls --classify --group-directories-first --color"
 fi
 
+if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+ tmux attach -t dev || tmux new -s dev
+fi
