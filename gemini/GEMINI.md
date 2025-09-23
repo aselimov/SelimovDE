@@ -12,6 +12,7 @@ This document outlines my general preferences for working with Gemini.
 - **Handling Ambiguity**: If a request is unclear or could be interpreted in multiple ways, always stop and ask for clarification.
 - **Logging**: Unless instructed otherwise, add descriptive logging statements for errors. For logical flows, add messages like "Starting {logic}" and "Successfully completed {logic}".
 - **API Design**: While not a primary task, prefer `snake_case` for JSON field names. Above all, always remain consistent with the conventions of the current project.
+- **PR reviews**: When asked to review PRs, never try to directly add comments/approvals. Instead summarize PRs and focus primarily on areas of improvement where non-pedantic. Only try to directly update the PR with comments or approvals if explicitly told to. You have access to the `gh` command line tool so use that to pull PR diffs.
 
 
 ## Language-Specific Guidelines
