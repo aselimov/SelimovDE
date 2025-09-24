@@ -8,7 +8,7 @@ SAVEHIST=100000
 setopt extendedglob notify
 unsetopt autocd beep
 setopt INC_APPEND_HISTORY    # Write to history file immediately, not when shell exits
-setopt SHARE_HISTORY         # Share history between all sessions
+setopt APPEND_HISTORY        # Append instead of overwriting the file
 setopt HIST_IGNORE_DUPS      # Don't save duplicate commands
 setopt HIST_IGNORE_SPACE     # Don't save commands starting with space
 
@@ -198,7 +198,7 @@ bindkey '^[[B' history-substring-search-down
 #==============================================================================
 
 if [ "$(uname)" = "Darwin" ]; then
-  export PATH="$PATH:/opt/homebrew/bin"
+  export PATH="/opt/homebrew/bin:$PATH"
   alias ls="gls --classify --group-directories-first --color"
   GEMINI_BIN=$(which gemini)
   function gemini(){
