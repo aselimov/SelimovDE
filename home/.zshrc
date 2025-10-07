@@ -16,6 +16,8 @@ setopt HIST_IGNORE_SPACE     # Don't save commands starting with space
 # Environment Variables
 #==============================================================================
 
+source ~/.profile
+
 export OMPI_MCA_rmaps_base_oversubscribe=1
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
@@ -106,10 +108,13 @@ gemini() {
   unset -f nvm node npm gemini
   load_nvm
   gemini "$@"
-
-
 }
 
+claude() {
+  unset -f claude
+  npm 2>&1 1>/dev/null
+  claude "$@"
+}
 # ghcup
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 

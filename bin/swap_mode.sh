@@ -2,9 +2,11 @@
 
 NVIM_CONF="${HOME}/.config/nvim/init.lua"
 GHOSTTY_CONF="${HOME}/.config/ghostty/config"
+DUNST_CONF="${HOME}/.config/dunst/dunstrc"
 
 [ -f "$NVIM_CONF" ] || { echo "Missing $NVIM_CONF"; exit 1; }
 [ -f "$GHOSTTY_CONF" ] || { echo "Missing $GHOSTTY_CONF"; exit 1; }
+[ -f "$DUNST_CONF" ] || { echo "Missing $DUNST_CONF"; exit 1; }
 
 set_light_mode() {
     sed -E -i 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-dark/\1zenwritten-light/' "$GHOSTTY_CONF"
@@ -64,18 +66,47 @@ if [ "$(uname)" != "Darwin" ]; then
         # GTK Theme
         gsettings set org.gnome.desktop.interface gtk-theme ''
         gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'  
+        sed -i -e 's@Net/ThemeName.*@Net/ThemeName "WhiteSur-Dark"@' ~/.xsettingsd
+
         # Rofi theme
         sed -i -e "s/light.rasi/dark.rasi/" $HOME/.config/rofi/config.rasi
+        # Swap dunst urgency_low background and foreground
+        sed -E -i '/^\[urgency_low\]/,/^\[.*\]/ {
+            s/^([[:space:]]*background[[:space:]]*=[[:space:]]*).*/\1"#3d3839"/
+            s/^([[:space:]]*foreground[[:space:]]*=[[:space:]]*).*/\1"#8e8e8e"/
+        }' "$DUNST_CONF"
+
+        # Swap dunst urgency_normal background and foreground
+        sed -E -i '/^\[urgency_normal\]/,/^\[.*\]/ {
+            s/^([[:space:]]*background[[:space:]]*=[[:space:]]*).*/\1"#3d3839"/
+            s/^([[:space:]]*foreground[[:space:]]*=[[:space:]]*).*/\1"#BBBBBB"/
+        }' "$DUNST_CONF"
 
     else
         echo "Swapping to light mode"
         # GTK Theme
         gsettings set org.gnome.desktop.interface gtk-theme ''
         gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
+        gsettings set org.gnome.desktop.interface color-scheme 'default'  
+        sed -i -e 's@Net/ThemeName.*@Net/ThemeName "WhiteSur-Light"@' ~/.xsettingsd
+        # Swap dunst urgency_low background and foreground
+        sed -E -i '/^\[urgency_low\]/,/^\[.*\]/ {
+            s/^([[:space:]]*background[[:space:]]*=[[:space:]]*).*/\1"#8e8e8e"/
+            s/^([[:space:]]*foreground[[:space:]]*=[[:space:]]*).*/\1"#3d3839"/
+        }' "$DUNST_CONF"
+
+        # Swap dunst urgency_normal background and foreground
+        sed -E -i '/^\[urgency_normal\]/,/^\[.*\]/ {
+            s/^([[:space:]]*background[[:space:]]*=[[:space:]]*).*/\1"#BBBBBB"/
+            s/^([[:space:]]*foreground[[:space:]]*=[[:space:]]*).*/\1"#191919"/
+        }' "$DUNST_CONF"
+
         # Rofi theme
         sed -i -e "s/dark.rasi/light.rasi/" $HOME/.config/rofi/config.rasi
 
     fi
 
+    killall dunst
     killall -HUP xsettingsd
 fi
