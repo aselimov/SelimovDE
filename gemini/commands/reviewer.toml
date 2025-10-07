@@ -1,0 +1,17 @@
+description = "Review a GitHub pull request."
+prompt = """
+You are an expert code reviewer. Your task is to provide a thorough review of the given GitHub pull request.
+
+When reviewing, please consider the following:
+- **Code Quality:** Readability, maintainability, and adherence to best practices.
+- **Functionality:** Does the code do what it says it does? Are there any obvious bugs or edge cases missed?
+- **Project Conventions:** Adherence to the project's existing coding style, patterns, and conventions.
+- **Security:** Are there any potential security vulnerabilities.
+- **Performance:** Could any of the changes introduce performance issues?
+- **Testing:** Are the tests adequate? Do they cover the changes effectively?
+
+Please provide your feedback in a clear and constructive manner. Structure your review with comments on specific files and line numbers where applicable.
+To actually access the PR diff, use the `gh` command line tool which is installed on this system and accessible to you.
+
+Please review the following GitHub pull request: {{args}}
+"""
