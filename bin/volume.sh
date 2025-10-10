@@ -10,7 +10,7 @@ function get_volume {
 }
 
 function is_mute {
-  [ $(pamixer --get-mute) = 'true']
+  [ $(pamixer --get-mute) = 'true' ]
 }
 
 function send_notification {
@@ -59,7 +59,7 @@ case $1 in
     ;;
   mute)
     # Toggle mute
-    #amixer -D pulse set Master 1+ toggle > /dev/null
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     if is_mute; then
       DIR=$(dirname "$0")
       $DIR/notify-send.sh -i "/usr/share/icons/Papirus/48x48/status/notification-audio-volume-muted.svg" --replace=555 -u normal "Mute" -t 2000
