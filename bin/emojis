@@ -17,7 +17,7 @@ case "$1" in
     input=$(tee)
     if [ ! -z "$input" ]; then
       emoji=${input: -1}
-      xdotool type "$emoji" 
+      ydotool type "$emoji" 
     fi
     ;;
   "")

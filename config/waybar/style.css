@@ -175,7 +175,7 @@ label:focus {
 }
 
 #tray {
-  background-color: #2980b9;
+  background-color: #191919;
 }
 
 #idle_inhibitor {
@@ -188,20 +188,20 @@ label:focus {
 }
 
 #mpd {
-  background-color: #66cc99;
-  color: #2a5c45;
+  background-color: #191919;
+  color: #BBBBBB;
 }
 
 #mpd.disconnected {
-  background-color: #f53c3c;
+  background-color: #191919;
 }
 
 #mpd.stopped {
-  background-color: #90b1b1;
+  background-color: #191919;
 }
 
 #mpd.paused {
-  background-color: #51a37a;
+  background-color: #191919;
 }
 
 #language {
@@ -210,4 +210,13 @@ label:focus {
   padding: 0 5px;
   margin: 6px 3px;
   min-width: 16px;
+}
+
+#workspaces{
+  background: #191919;
+
+}
+
+#custom-packages{
+  color: #DE6E7c;
 }

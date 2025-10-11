@@ -1,16 +1,16 @@
 {
      "position": "top", // Waybar position (top|bottom|left|right)
     "height": 5, // Waybar height (to be removed for auto height)
-    "modules-left": [],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "cpu","memory","battery", "tray"],
+    "modules-right": ["custom/packages", "pulseaudio", "network", "cpu","memory","battery"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "format": "    {title} | {artist} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        "format-disconnected": "",
+        "format-stopped": "",
         "unknown-tag": "N/A",
         "interval": 2,
         "consume-icons": {
@@ -83,8 +83,8 @@
         },
         "format": "{icon}",
         "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}%",
-        "format-plugged": "{capacity}%",
+        "format-charging": "{icon}",
+        "format-plugged": "{icon}",
         "format-alt": "{capacity}% | {time}"
     },
     "network": {
@@ -105,16 +105,20 @@
         "format-muted": "󰝟 ",
         "on-click": "pavucontrol"
     },
-    "custom/media": {
+    "custom/packages": {
         "format": " {}",
-        "return-type": "json",
-        "max-length": 40,
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "exec": "/home/aselimov/bin/outdated_packages.sh" 
     },
     "hyprland/workspaces": {
      "format": "{icon}",
+      "format-icons":{
+		"1": "",
+		"2": "󰠮",
+		"3": "",
+     	"4": "",
+		"5": ""
+        },
+     "active-only": true,
      "on-scroll-up": "hyprctl dispatch workspace e+1",
      "on-scroll-down": "hyprctl dispatch workspace e-1"
 }
