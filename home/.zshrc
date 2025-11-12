@@ -34,6 +34,7 @@ source ~/.profile
 #==============================================================================
 
 alias clip2png="xclip -selection clipboard -target image/png -out"
+alias k="kubectl"
 
 
 
@@ -103,6 +104,12 @@ claude() {
   npm 2>&1 1>/dev/null
   claude "$@"
 }
+
+codex() {
+  unset -f codex
+  npm 2>&1 1>/dev/null
+  codex "$@"
+}
 # ghcup
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 
@@ -159,3 +166,11 @@ fi
 if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
  tmux attach -t dev || tmux new -s dev
 fi
+
+# pnpm
+export PNPM_HOME="/home/aselimov/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

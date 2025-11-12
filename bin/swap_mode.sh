@@ -66,7 +66,7 @@ if [ "$(uname)" != "Darwin" ]; then
         # GTK Theme
         gsettings set org.gnome.desktop.interface gtk-theme ''
         gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
-        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'  
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         sed -i -e 's@Net/ThemeName.*@Net/ThemeName "WhiteSur-Dark"@' ~/.xsettingsd
 
         # Rofi theme
@@ -83,12 +83,23 @@ if [ "$(uname)" != "Darwin" ]; then
             s/^([[:space:]]*foreground[[:space:]]*=[[:space:]]*).*/\1"#BBBBBB"/
         }' "$DUNST_CONF"
 
+        # Plasma theme
+        if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
+            plasma-apply-lookandfeel  -a com.github.vinceliuice.WhiteSur-dark
+            plasma-apply-cursortheme  phinger-cursors-dark
+            kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus-Dark
+            kwriteconfig6 --file ksplashrc --group KSplash --key Theme Breeze
+            kquitapp6 plasmashell
+            sleep 0.3
+            kstart5 plasmashell
+        fi
+
     else
         echo "Swapping to light mode"
         # GTK Theme
         gsettings set org.gnome.desktop.interface gtk-theme ''
         gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Light'
-        gsettings set org.gnome.desktop.interface color-scheme 'default'  
+        gsettings set org.gnome.desktop.interface color-scheme 'default'
         sed -i -e 's@Net/ThemeName.*@Net/ThemeName "WhiteSur-Light"@' ~/.xsettingsd
         # Swap dunst urgency_low background and foreground
         sed -E -i '/^\[urgency_low\]/,/^\[.*\]/ {
@@ -104,7 +115,17 @@ if [ "$(uname)" != "Darwin" ]; then
 
         # Rofi theme
         sed -i -e "s/dark.rasi/light.rasi/" $HOME/.config/rofi/config.rasi
-
+        #
+        # Plasma theme
+        if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
+            plasma-apply-lookandfeel  -a com.github.vinceliuice.WhiteSur-alt
+            plasma-apply-cursortheme  phinger-cursors-dark
+            kwriteconfig6 --file kdeglobals --group Icons --key Theme Papirus
+            kwriteconfig6 --file ksplashrc --group KSplash --key Theme Breeze
+            kquitapp6 plasmashell
+            sleep 0.3
+            kstart6 plasmashell
+        fi
     fi
 
     killall dunst
