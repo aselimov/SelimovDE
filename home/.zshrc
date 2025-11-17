@@ -25,6 +25,8 @@ export LS_COLORS='di=1;37:ln=35:so=32:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:s
 export XKB_DEFAULT_OPTIONS="caps:escape"
 export PASSWORD_STORE_CHARACTER_SET='a-zA-Z0-9+\-$!*_='
 export XDEB_PKGROOT=${HOME}/.config/xdeb
+export EDITOR=nvim
+export TERMINAL=ghostty
 
 # Custom path additions
 source ~/.profile
@@ -36,7 +38,9 @@ source ~/.profile
 alias clip2png="xclip -selection clipboard -target image/png -out"
 alias k="kubectl"
 
-
+ssh() {
+    NO_TMUX=1 nohup ghostty --command="ssh $*" >/dev/null 2>&1 &
+}
 
 #==============================================================================
 # Functions
@@ -101,6 +105,8 @@ gemini() {
 
 claude() {
   unset -f claude
+  export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic
+  export ANTHROPIC_AUTH_TOKEN="$(pass list zai_token)"
   npm 2>&1 1>/dev/null
   claude "$@"
 }
@@ -163,7 +169,7 @@ else
   alias ls="ls --classify --group-directories-first --color"
 fi
 
-if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]] && [[ -z "$NO_TMUX" ]]; then
  tmux attach -t dev || tmux new -s dev
 fi
 
