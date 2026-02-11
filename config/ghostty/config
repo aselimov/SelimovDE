@@ -13,6 +13,7 @@ theme = zenwritten-dark
 # Font-size keybindings (match Ctrl+Shift+j/k from WezTerm)
 keybind = all:ctrl+shift+k=increase_font_size:1
 keybind = all:ctrl+shift+j=decrease_font_size:1
+keybind = shift+enter=text:\x1b\r
 
 # Optional: make the split divider visible (newer Ghostty)
 # split-divider-color = #444444
