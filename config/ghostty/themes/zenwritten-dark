@@ -24,3 +24,5 @@ palette = 12=#61ABDA
 palette = 13=#CF86C1
 palette = 14=#65B8C1
 palette = 15=#8e8e8e
+
+unfocused-split-fill=#BBBBBB
