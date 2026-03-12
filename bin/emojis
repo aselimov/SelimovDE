@@ -7,7 +7,7 @@
 
 set -e
 
-dmenu="dmenu -theme-str 'window {width: 25%;}'  -i -p Emoji"
+dmenu="dmenu -theme-str 'window {width: 50%;}'  -i -p Emoji"
 case "$1" in
   "list")
     data=$(sed '0,/^__DATA__$/d' "$0")
@@ -17,7 +17,7 @@ case "$1" in
     input=$(tee)
     if [ ! -z "$input" ]; then
       emoji=${input: -1}
-      xdotool type "$emoji" 
+      ydotool type "$emoji" 
     fi
     ;;
   "")

@@ -53,12 +53,13 @@ xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0 1
 
 exec bato &
 exec sync_mail.sh &
-exec xsettingsd &
 exec sxhkd &
 exec mpd &  
 exec picom -b &
 exec wallpaper_randomizer.sh &
 exec dwmblocks &
 wmname LG3D &
+exec xsettingsd &
+exec swap_monitor.sh &
 exec dbus-launch --sh-syntax --exit-with-session "dwm"
 

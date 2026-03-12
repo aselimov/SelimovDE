@@ -12,7 +12,7 @@ configuration {
 	modi:                       "drun";
     show-icons:                 true;
     icon-theme:	"Papirus";
-    font: "IosevkaTermSlab Nerd Font Propo 14";
+    font: "IosevkaTerm Nerd Font Propo 14";
     display-drun:               "";
     //display-run:                "";
     //display-filebrowser:        "";

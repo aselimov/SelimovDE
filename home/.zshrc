@@ -16,6 +16,8 @@ setopt HIST_IGNORE_SPACE     # Don't save commands starting with space
 # Environment Variables
 #==============================================================================
 
+source ~/.profile
+
 export OMPI_MCA_rmaps_base_oversubscribe=1
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
@@ -23,6 +25,8 @@ export LS_COLORS='di=1;37:ln=35:so=32:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:s
 export XKB_DEFAULT_OPTIONS="caps:escape"
 export PASSWORD_STORE_CHARACTER_SET='a-zA-Z0-9+\-$!*_='
 export XDEB_PKGROOT=${HOME}/.config/xdeb
+export EDITOR=nvim
+export TERMINAL=ghostty
 
 # Custom path additions
 source ~/.profile
@@ -32,8 +36,11 @@ source ~/.profile
 #==============================================================================
 
 alias clip2png="xclip -selection clipboard -target image/png -out"
+alias k="kubectl"
 
-
+ssh() {
+    NO_TMUX=1 nohup ghostty --command="ssh $*" >/dev/null 2>&1 &
+}
 
 #==============================================================================
 # Functions
@@ -94,10 +101,21 @@ gemini() {
   unset -f nvm node npm gemini
   load_nvm
   gemini "$@"
-
-
 }
 
+claude() {
+  unset -f claude
+  export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic
+  export ANTHROPIC_AUTH_TOKEN="$(pass list zai_token)"
+  npm 2>&1 1>/dev/null
+  claude "$@"
+}
+
+codex() {
+  unset -f codex
+  npm 2>&1 1>/dev/null
+  codex "$@"
+}
 # ghcup
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 
@@ -151,6 +169,14 @@ else
   alias ls="ls --classify --group-directories-first --color"
 fi
 
-if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
+if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]] && [[ -z "$NO_TMUX" ]]; then
  tmux attach -t dev || tmux new -s dev
 fi
+
+# pnpm
+export PNPM_HOME="/home/aselimov/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

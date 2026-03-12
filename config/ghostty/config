@@ -1,8 +1,9 @@
 # --- Basics
-font-family = "IosevkaTermSlab Nerd Font Propo"
+font-family = "IosevkaTerm Nerd Font Propo"
 font-style = "Regular"
 font-size = 13
 background-opacity = 1.0
+window-decoration = auto
 confirm-close-surface = false
 
 # Auto light/dark theme pair that matches your two palettes below

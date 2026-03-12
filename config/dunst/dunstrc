@@ -2,8 +2,7 @@
     frame_width = 0
     frame_color = "#000000"
     
-    font = FiraCode Nerd Font 12
-    #font = Iosevka Nerd Font 13
+    font = IosevkaTerm Nerd Font 13
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -187,13 +186,13 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#8e8e8e"
-    foreground = "#3d3839"
+    background = "#3d3839"
+    foreground = "#8e8e8e"
     timeout = 5
 
 [urgency_normal]
-    background = "#BBBBBB"
-    foreground = "#191919"
+    background = "#3d3839"
+    foreground = "#BBBBBB"
     timeout = 5
 
 [urgency_critical]
