@@ -63,6 +63,7 @@ zstyle -e ':completion:*:hosts' hosts 'reply=(
   ${=${${(f)"$(cat {/etc/ssh_,~/ar.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
   ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
 )'
+source <(k completion zsh)
 
 #==============================================================================
 # Plugins & Tools
@@ -80,42 +81,23 @@ load_nvm() {
 
 # Create placeholder functions that load nvm once, then call the real command
 nvm() {
-    unset -f nvm node npm gemini
+    unset -f nvm node npm 
     load_nvm
     nvm "$@"
 }
 
 node() {
-    unset -f nvm node npm gemini
+    unset -f nvm node npm
     load_nvm
     node "$@"
 }
 
 npm() {
-    unset -f nvm node npm gemini
+    unset -f nvm node npm
     load_nvm
     npm "$@"
 }
 
-gemini() {
-  unset -f nvm node npm gemini
-  load_nvm
-  gemini "$@"
-}
-
-claude() {
-  unset -f claude
-  export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic
-  export ANTHROPIC_AUTH_TOKEN="$(pass list zai_token)"
-  npm 2>&1 1>/dev/null
-  claude "$@"
-}
-
-codex() {
-  unset -f codex
-  npm 2>&1 1>/dev/null
-  codex "$@"
-}
 # ghcup
 [ -f "/home/aselimov/.ghcup/env" ] && . "/home/aselimov/.ghcup/env" # ghcup-env
 
@@ -132,8 +114,15 @@ if command -v jenv >/dev/null 2>&1; then
   eval "$(jenv init -)"
 fi
 
-# starship
-eval "$(starship init zsh)"
+# Simple notify function 
+notify() {
+  local cmd="$*"
+  eval "$cmd"
+  local rc=$?
+  osascript -e "display notification \"Done (exit=$rc)\" with title \"${cmd//\"/\\\"}\""
+  return $rc
+}
+
 
 # zsh-autosuggestions
 source "$HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -157,21 +146,16 @@ bindkey '^[[B' history-substring-search-down
 #==============================================================================
 
 if [ "$(uname)" = "Darwin" ]; then
-  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:/opt/homebrew/bin:$PATH"
   alias ls="gls --classify --group-directories-first --color"
-  GEMINI_BIN=$(which gemini)
-  function gemini(){
-    source ~/.gemini_project && $GEMINI_BIN "$@"
-  }
   export NVIM_JDTLS_JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/"
-  # I only start tmux by default on Mac because of dwm+swallow patch
 else
   alias ls="ls --classify --group-directories-first --color"
 fi
 
-if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]] && [[ -z "$NO_TMUX" ]]; then
- tmux attach -t dev || tmux new -s dev
-fi
+#if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]] && [[ -z "$NO_TMUX" ]]; then
+# tmux attach -t dev || tmux new -s dev
+#fi
 
 # pnpm
 export PNPM_HOME="/home/aselimov/.local/share/pnpm"
@@ -180,3 +164,10 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/aselimov/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# starship
+eval "$(starship init zsh)"

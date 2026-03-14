@@ -30,3 +30,8 @@ split-inherit-working-directory = true
 
 keybind = cmd+shift+p=ignore
 
+window-save-state = always
+confirm-close-surface = true
+keybind = cmd+shift+t=close_surface
+
+
