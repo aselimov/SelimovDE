@@ -3,16 +3,19 @@
 NVIM_CONF="${HOME}/.config/nvim/init.lua"
 GHOSTTY_CONF="${HOME}/.config/ghostty/config"
 GEMINI_CONF="${HOME}/repos/SelimovDE/gemini/settings.json"
+CLAUDE_CONF="${HOME}/.claude.json"
 
 [ -f "$NVIM_CONF" ] || { echo "Missing $NVIM_CONF"; exit 1; }
 [ -f "$GHOSTTY_CONF" ] || { echo "Missing $GHOSTTY_CONF"; exit 1; }
 [ -f "$GEMINI_CONF" ] || { echo "Missing $GEMINI_CONF"; exit 1; }
+[ -f "$CLAUDE_CONF" ] || { echo "Missing $CLAUDE_CONF"; exit 1; }
 
 which sed
 set_light_mode() {
     sed -E -i 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-dark/\1zenwritten-light/' "$GHOSTTY_CONF"
     sed -E -i 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1true/' "$NVIM_CONF"
     sed -i 's/"theme": "Zenwritten Dark"/"theme": "Zenwritten Light"/' "$GEMINI_CONF"
+    sed -i 's/"theme": "dark"/"theme": "light"/' "$CLAUDE_CONF"
     MODE="light"
 }
 
@@ -20,6 +23,7 @@ set_dark_mode() {
     sed -E -i 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-light/\1zenwritten-dark/' "$GHOSTTY_CONF"
     sed -E -i 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1false/' "$NVIM_CONF"
     sed -i 's/"theme": "Zenwritten Light"/"theme": "Zenwritten Dark"/' "$GEMINI_CONF"
+    sed -i 's/"theme": "light"/"theme": "dark"/' "$CLAUDE_CONF"
     MODE="dark"
 }
 

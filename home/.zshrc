@@ -16,8 +16,6 @@ setopt HIST_IGNORE_SPACE     # Don't save commands starting with space
 # Environment Variables
 #==============================================================================
 
-source ~/.profile
-
 export OMPI_MCA_rmaps_base_oversubscribe=1
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
@@ -146,7 +144,6 @@ bindkey '^[[B' history-substring-search-down
 #==============================================================================
 
 if [ "$(uname)" = "Darwin" ]; then
-  export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:/opt/homebrew/bin:$PATH"
   alias ls="gls --classify --group-directories-first --color"
   export NVIM_JDTLS_JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/"
 else
