@@ -10,7 +10,6 @@ CLAUDE_CONF="${HOME}/.claude.json"
 [ -f "$GEMINI_CONF" ] || { echo "Missing $GEMINI_CONF"; exit 1; }
 [ -f "$CLAUDE_CONF" ] || { echo "Missing $CLAUDE_CONF"; exit 1; }
 
-which sed
 set_light_mode() {
     sed -E -i 's/^([[:space:]]*theme[[:space:]]*=[[:space:]]*)zenwritten-dark/\1zenwritten-light/' "$GHOSTTY_CONF"
     sed -E -i 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1true/' "$NVIM_CONF"
@@ -61,11 +60,7 @@ for dir in "${XDG_RUNTIME_DIR:-}" "${TMPDIR:-/tmp}" "/tmp" "$HOME/.local/state/n
 done
 
 
-# Reload Ghostty via AppleScript menu click
-osascript -e 'tell application "System Events"
-    tell process "Ghostty"
-        click menu item "Reload Configuration" of menu "Ghostty" of menu bar item "Ghostty" of menu bar 1
-    end tell
-end tell' 2>/dev/null || true
+# Reload Ghostty config via signal (no Accessibility permissions required)
+kill -SIGUSR2 $(ps aux | grep "[G]hostty.app" | awk '{print $2}')
 
 echo "Switched to ${MODE} mode"

@@ -1,4 +1,5 @@
 # --- Basics
+auto-update-channel = tip
 font-family = "IosevkaTerm Nerd Font Propo"
 font-style = "Regular"
 font-size = 13
