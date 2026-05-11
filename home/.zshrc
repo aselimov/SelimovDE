@@ -36,9 +36,13 @@ source ~/.profile
 alias clip2png="xclip -selection clipboard -target image/png -out"
 alias k="kubectl"
 
-ssh() {
+ssh_no_tmux() {
     NO_TMUX=1 nohup ghostty --command="ssh $*" >/dev/null 2>&1 &
 }
+
+alias jjn="jj new -B @ --no-edit"
+alias jjs="jj squash --interactive --from @ --into @-"
+alias jjp="jj bookmark move master --to @-; jj git push"
 
 #==============================================================================
 # Functions
