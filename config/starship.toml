@@ -8,10 +8,6 @@ $hostname\
 $shlvl\
 $kubernetes\
 $directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
 $hg_branch\
 $docker_context\
 $package\
@@ -135,6 +131,7 @@ style = 'bold #BBBBBB'
 style = 'bold #BBBBBB'
 [gcloud]
 style = 'bold #BBBBBB'
+disabled=true
 [openstack]
 style = 'bold #BBBBBB'
 [crystal]
@@ -166,3 +163,4 @@ style = 'bold #BBBBBB'
 success_symbol = "[󰜴](bold green)"
 error_symbol = "[󰬅](bold red)"
 vicmd_symbol = "[N](bold green)"
+

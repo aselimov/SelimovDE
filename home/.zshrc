@@ -44,6 +44,35 @@ alias jjn="jj new -B @ --no-edit"
 alias jjs="jj squash --interactive --from @ --into @-"
 alias jjp="jj bookmark move master --to @-; jj git push"
 
+sandbox() {
+  local host_repos="$HOME/repos"
+  local sandbox_cwd="/workspace"
+
+  if [[ "$PWD" == "$host_repos" ]]; then
+    sandbox_cwd="/workspace"
+  elif [[ "$PWD" == "$host_repos"/* ]]; then
+    sandbox_cwd="/workspace/${PWD#$host_repos/}"
+  fi
+
+  if ! docker ps -a --format '{{.Names}}' | grep -q '^dev-sandbox$'; then
+    docker run -dit --name dev-sandbox \
+      --env-file "$host_repos/dev_sandbox/.env" \
+      -v "$host_repos:/workspace" \
+      -v pi-state:/root/.pi \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      dev-sandbox:latest
+  else
+    docker start dev-sandbox 2>/dev/null
+  fi
+
+  if (( $# > 0 )); then
+    docker exec -it -w "$sandbox_cwd" dev-sandbox /bin/zsh -l -c 'exec "$@"' sandbox "$@"
+  else
+    docker exec -it -w "$sandbox_cwd" dev-sandbox /bin/zsh -l
+  fi
+}
+
+
 #==============================================================================
 # Functions
 #==============================================================================
@@ -154,9 +183,7 @@ else
   alias ls="ls --classify --group-directories-first --color"
 fi
 
-#if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]] && [[ -z "$NO_TMUX" ]]; then
-# tmux attach -t dev || tmux new -s dev
-#fi
+
 
 # pnpm
 export PNPM_HOME="/home/aselimov/.local/share/pnpm"
@@ -172,3 +199,14 @@ export PATH="$PATH:/Users/aselimov/.lmstudio/bin"
 
 # starship
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/Users/aselimov/.bun/_bun" ] && source "/Users/aselimov/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]] && [[ -z "$NO_TMUX" ]]; then
+ tmux attach -t dev || tmux new -s dev
+fi

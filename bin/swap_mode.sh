@@ -15,6 +15,8 @@ set_light_mode() {
     sed -E -i 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1true/' "$NVIM_CONF"
     sed -i 's/"theme": "Zenwritten Dark"/"theme": "Zenwritten Light"/' "$GEMINI_CONF"
     sed -i 's/"theme": "dark"/"theme": "light"/' "$CLAUDE_CONF"
+    sed -i "s/set -g window-style .*/set -g window-style 'bg=#E8E2DF'/" ~/.tmux.conf
+    sed -i "s/set -g window-active-style .*/set -g window-active-style 'bg=default'/" ~/.tmux.conf
     MODE="light"
 }
 
@@ -23,6 +25,8 @@ set_dark_mode() {
     sed -E -i 's/(vim.g.light_mode[[:space:]]*=[[:space:]]*).*/\1false/' "$NVIM_CONF"
     sed -i 's/"theme": "Zenwritten Light"/"theme": "Zenwritten Dark"/' "$GEMINI_CONF"
     sed -i 's/"theme": "light"/"theme": "dark"/' "$CLAUDE_CONF"
+    sed -i "s/set -g window-style .*/set -g window-style 'bg=#242424'/" ~/.tmux.conf
+    sed -i "s/set -g window-active-style .*/set -g window-active-style 'bg=default'/" ~/.tmux.conf
     MODE="dark"
 }
 
@@ -62,5 +66,14 @@ done
 
 # Reload Ghostty config via signal (no Accessibility permissions required)
 kill -SIGUSR2 $(ps aux | grep "[G]hostty.app" | awk '{print $2}')
+
+
+# Reload tmux config
+tmux source-file ~/.tmux.conf
+
+tmux list-clients -F '#{client_tty}' |
+while read -r tty; do
+    tmux refresh-client -R -t "$tty"
+done
 
 echo "Switched to ${MODE} mode"

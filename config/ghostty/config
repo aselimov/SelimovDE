@@ -1,8 +1,7 @@
 # --- Basics
 auto-update-channel = tip
-font-family = "IosevkaTerm Nerd Font Propo"
-font-style = "Regular"
-font-size = 13
+font-family = "DepartureMono Nerd Font Mono"
+font-size = 11
 background-opacity = 1.0
 window-decoration = auto
 confirm-close-surface = false
@@ -14,7 +13,6 @@ theme = zenwritten-light
 # Font-size keybindings (match Ctrl+Shift+j/k from WezTerm)
 keybind = all:ctrl+shift+k=increase_font_size:1
 keybind = all:ctrl+shift+j=decrease_font_size:1
-keybind = shift+enter=text:\x1b\r
 
 # Optional: make the split divider visible (newer Ghostty)
 # split-divider-color = #444444
